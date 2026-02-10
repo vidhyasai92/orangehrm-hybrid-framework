@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="OrangeHRM Hybrid Framework Test Suite" parallel="false">
+    
+    <!-- Complete Test Suite -->
+    <test name="All Tests" enabled="true">
+        <packages>
+            <package name="tests.orangehrm"/>
+            <package name="tests.uiconcepts"/>
+        </packages>
+    </test>
+    
+    <!-- OrangeHRM Tests Only -->
+    <test name="OrangeHRM Tests" enabled="false">
+        <packages>
+            <package name="tests.orangehrm"/>
+        </packages>
+    </test>
+    
+    <!-- UI Concepts Tests Only -->
+    <test name="UI Concepts Tests" enabled="false">
+        <packages>
+            <package name="tests.uiconcepts"/>
+        </packages>
+    </test>
+    
+</suite>
