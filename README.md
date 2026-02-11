@@ -1,10 +1,18 @@
 # OrangeHRM Hybrid Automation Framework
 
-A comprehensive Java + Selenium Hybrid Framework demonstrating real-world automation with OrangeHRM application and complete Selenium concepts coverage.
+A Java + Selenium automation framework built for testing OrangeHRM application and demonstrating various Selenium concepts. This project combines Page Object Model with data-driven and configuration-driven approaches.
 
-## Framework Type: Hybrid
+## About This Project
+
+I built this framework to practice automation testing concepts and create a portfolio project. It covers both functional testing of a real application (OrangeHRM) and technical Selenium skills demonstration using various UI elements.
+
+The framework uses a hybrid approach combining multiple design patterns for better maintainability and scalability.
+
+## Framework Architecture
+
+**Hybrid Approach**: Combines multiple design patterns
 - **POM (Page Object Model)**: Maintainable page classes with reusable methods
-- **Data-driven**: Configuration-based execution with external data support
+- **Data-driven**: Configuration-based execution with external data support  
 - **Config-driven**: Environment settings via properties file
 - **Modular**: Reusable utility classes for common operations
 
@@ -215,8 +223,8 @@ public void onTestFailure(ITestResult result) {
 - API testing integration
 
 ## Author
-Vidhya Sai  
+**Vidhya Sai**  
+Automation Test Engineer  
 GitHub: [@vidhyasai92](https://github.com/vidhyasai92)
 
-## License
-This project is for educational and portfolio purposes.
+*This project was created for learning purposes and to demonstrate automation testing skills.*
