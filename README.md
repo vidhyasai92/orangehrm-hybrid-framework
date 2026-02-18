@@ -1,100 +1,66 @@
 # OrangeHRM Hybrid Automation Framework
 
-A Java + Selenium automation framework built for testing OrangeHRM application and demonstrating various Selenium concepts. This project combines Page Object Model with data-driven and configuration-driven approaches.
-
-## About This Project
-
-I built this framework to practice automation testing concepts and create a portfolio project. It covers both functional testing of a real application (OrangeHRM) and technical Selenium skills demonstration using various UI elements.
-
-The framework uses a hybrid approach combining multiple design patterns for better maintainability and scalability.
+A comprehensive Selenium WebDriver automation framework built with Java, TestNG, and Maven. This framework demonstrates both real-world application testing (OrangeHRM) and complete Selenium WebDriver concepts coverage.
 
 ## Framework Architecture
 
-**Hybrid Approach**: Combines multiple design patterns
-- **POM (Page Object Model)**: Maintainable page classes with reusable methods
-- **Data-driven**: Configuration-based execution with external data support  
-- **Config-driven**: Environment settings via properties file
-- **Modular**: Reusable utility classes for common operations
+**Hybrid Framework** = Page Object Model + Data-Driven + Configuration-Driven + Reusable Utilities
 
 ## Tech Stack
+
 - **Language**: Java 11
-- **Automation**: Selenium WebDriver 4.16.1
-- **Test Runner**: TestNG 7.9.0
+- **Automation Tool**: Selenium WebDriver 4.16.1
+- **Test Framework**: TestNG 7.9.0
 - **Build Tool**: Maven
-- **Driver Manager**: WebDriverManager 5.6.3
+- **Driver Management**: WebDriverManager
 - **Reporting**: ExtentReports 5.1.1
-- **Logging**: Log4j2 2.22.1
-- **Data Handling**: Jackson (JSON), Apache POI (Excel)
-- **Utilities**: Commons IO
+- **Logging**: Log4j2
+- **Data Handling**: Apache POI (Excel), Jackson (JSON)
 
 ## Project Structure
+
 ```
-OrangeHRM-HybridFramework/
-├── src/test/java/
-│   ├── base/                    # Base classes
-│   │   ├── BaseTest.java        # Test setup/teardown
-│   │   ├── DriverFactory.java   # WebDriver initialization
-│   │   └── TestListener.java    # ExtentReports + screenshots
-│   ├── config/                  # Configuration loader
-│   │   └── ConfigLoader.java
-│   ├── pages/                   # Page Object classes
-│   │   ├── LoginPage.java
-│   │   ├── DashboardPage.java
-│   │   ├── AlertsPage.java
-│   │   ├── FramesPage.java
-│   │   └── WebTablesPage.java
-│   ├── tests/
-│   │   ├── orangehrm/          # OrangeHRM functional tests
-│   │   │   └── LoginTests.java
-│   │   └── uiconcepts/         # Selenium concepts tests
-│   │       ├── AlertsTests.java
-│   │       ├── FramesTests.java
-│   │       └── WebTablesTests.java
-│   └── utils/                   # Utility classes
-│       ├── WaitUtils.java
-│       ├── JSUtils.java
-│       ├── WindowUtils.java
-│       ├── FrameUtils.java
-│       ├── ElementUtils.java
-│       └── ScreenshotUtils.java
-├── src/test/resources/
-│   ├── config.properties        # Configuration settings
-│   ├── log4j2.xml              # Logging configuration
-│   └── testng.xml              # TestNG suite configuration
-├── reports/                     # Test reports (auto-generated)
-└── pom.xml                     # Maven dependencies
+src/test/java/
+├── base/                 # Base classes and driver management
+├── config/               # Configuration management
+├── pages/                # Page Object Model classes
+├── tests/
+│   ├── orangehrm/        # Real application tests
+│   └── uiconcepts/       # Selenium concepts demonstration
+├── utils/                # Reusable utility classes
+└── data/                 # Test data providers
+
+src/test/resources/
+├── config.properties     # Application configuration
+├── log4j2.xml           # Logging configuration
+├── testng.xml           # TestNG suite configuration
+└── testdata/            # Test data files
 ```
 
-## Features
+## Test Suites
 
-### Two Test Suites
-
-#### 1. OrangeHRM Suite (Real Application)
-- Login with valid/invalid credentials
-- Logout functionality
+### 1. OrangeHRM Suite
+Tests real-world scenarios on OrangeHRM demo application:
+- Login/Logout functionality
+- User authentication validation
 - Dashboard navigation
-- PIM, Leave, Admin modules (expandable)
 
-#### 2. UI Concepts Suite (Selenium Concepts)
-- **Alerts**: Simple, Timer, Confirm, Prompt alerts
+### 2. UI Concepts Suite
+Comprehensive Selenium WebDriver concepts:
+- **Alerts**: Simple, Confirmation, Prompt alerts
 - **Frames**: Single and nested iframe handling
-- **Web Tables**: Add, edit, delete table records
-- **Actions Class**: Hover, drag-drop, right-click (expandable)
-- **JavaScript Executor**: Scroll, click, highlight (expandable)
-- **Windows/Tabs**: Multiple window handling (expandable)
-
-### Framework Capabilities
-- **Explicit Waits**: WebDriverWait for dynamic elements
-- **Screenshot on Failure**: Auto-capture and attach to report
-- **ExtentReports**: HTML reports with test steps and logs
-- **Log4j2**: Console and file logging
-- **Browser Support**: Chrome, Firefox, Edge
-- **Headless Mode**: CI/CD ready
-- **ThreadLocal Driver**: Parallel execution support
+- **Web Tables**: Data extraction and validation
+- **Actions Class**: Hover, Drag-drop, Right-click, Double-click
+- **JavaScript Executor**: Element interaction, scrolling, page manipulation
+- **Windows/Tabs**: Multi-window handling and switching
+- **Form Elements**: Checkboxes, Radio buttons, Dropdowns
+- **File Operations**: Upload and Download functionality
+- **Date Picker**: Date selection and validation
+- **Sliders/Progress**: Interactive element handling
 
 ## Configuration
 
-Edit `src/test/resources/config.properties`:
+The framework supports multiple execution modes through `config.properties`:
 
 ```properties
 # Application URLs
@@ -105,126 +71,68 @@ baseUrlDemoQA=https://demoqa.com
 browser=chrome
 headless=false
 
-# Wait Configuration (in seconds)
+# Wait Configuration
 implicitWaitSeconds=10
 explicitWaitSeconds=15
-pageLoadTimeout=30
-
-# Screenshot Configuration
-screenshotOnFailure=true
 
 # Test Data
 defaultUsername=Admin
 defaultPassword=admin123
 ```
 
-## How to Run
+## Running Tests
 
 ### Prerequisites
 - Java 11 or higher
 - Maven 3.6+
-- Chrome/Firefox/Edge browser
 
-### Run from Command Line
+### Execution Commands
 
-**Run all tests:**
 ```bash
+# Run all tests
 mvn clean test
-```
 
-**Run with specific browser:**
-```bash
-mvn clean test -Dbrowser=chrome
-```
+# Run specific suite
+mvn clean test -Dtest=tests.orangehrm.*
+mvn clean test -Dtest=tests.uiconcepts.*
 
-**Run in headless mode:**
-```bash
+# Run with different browser
+mvn clean test -Dbrowser=firefox
+
+# Run in headless mode
 mvn clean test -Dheadless=true
 ```
 
-**Run specific suite (edit testng.xml to enable/disable tests):**
-- Enable/disable tests by changing `enabled="true"` or `enabled="false"` in testng.xml
-
-### Run from Eclipse
-
-1. Right-click on `testng.xml`
-2. Select **Run As > TestNG Suite**
-
-Or run individual test classes:
-1. Right-click on test class (e.g., `LoginTests.java`)
-2. Select **Run As > TestNG Test**
+### Eclipse Execution
+1. Import project as Maven project
+2. Right-click on `testng.xml` → Run As → TestNG Suite
+3. Or run individual test classes directly
 
 ## Reports
 
-After test execution:
-- **ExtentReports**: `reports/ExtentReport_<timestamp>.html`
-- **Screenshots**: `reports/screenshots/` (on failure)
-- **Logs**: `logs/automation.log`
+- **ExtentReports**: Generated in `reports/extent-report.html`
+- **Screenshots**: Captured on test failures in `reports/screenshots/`
+- **Logs**: Detailed execution logs in `logs/` directory
 
-Open the HTML report in any browser to view:
-- Test execution summary
-- Pass/Fail status
-- Test steps with logs
-- Screenshots for failed tests
-- Execution time
+## Key Features
 
-## Key Design Patterns
+- **Cross-browser Support**: Chrome, Firefox, Edge
+- **Headless Execution**: For CI/CD pipelines
+- **Automatic Screenshots**: On test failures
+- **Retry Mechanism**: Configurable test retry on failure
+- **Parallel Execution**: TestNG parallel execution support
+- **Data-Driven**: Excel and JSON data support
+- **Comprehensive Logging**: Log4j2 integration
+- **CI/CD Ready**: Maven Surefire plugin configuration
 
-### Page Object Model (POM)
-```java
-public class LoginPage {
-    @FindBy(name = "username")
-    private WebElement usernameField;
-    
-    public void enterUsername(String username) {
-        WaitUtils.waitForElementVisible(usernameField);
-        usernameField.sendKeys(username);
-    }
-}
-```
+## Framework Highlights
 
-### Explicit Waits
-```java
-public static void waitForElementVisible(WebElement element) {
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-    wait.until(ExpectedConditions.visibilityOf(element));
-}
-```
-
-### Screenshot on Failure
-```java
-@Override
-public void onTestFailure(ITestResult result) {
-    String screenshotPath = ScreenshotUtils.captureScreenshot(testName);
-    extentTest.addScreenCaptureFromPath(screenshotPath);
-}
-```
-
-## Selenium Concepts Covered
-
-✅ Alerts (Simple, Timer, Confirm, Prompt)  
-✅ Frames/iFrames (Single, Nested)  
-✅ Web Tables (Read, Add, Delete)  
-✅ Explicit Waits (WebDriverWait)  
-✅ Page Object Model  
-✅ JavaScript Executor  
-✅ Window Handling  
-✅ Screenshot Capture  
-✅ ExtentReports Integration  
-✅ Log4j2 Logging  
-✅ Configuration Management  
-
-## Future Enhancements
-- Data-driven testing with Excel/JSON
-- Parallel test execution
-- CI/CD integration (GitHub Actions)
-- Docker support
-- More UI concepts (drag-drop, file upload/download, date pickers)
-- API testing integration
+- **Robust Wait Strategy**: Explicit waits with custom utility methods
+- **Modular Design**: Separate utilities for different functionalities
+- **Clean Code**: Following Java best practices and naming conventions
+- **Scalable Architecture**: Easy to extend for new test scenarios
+- **Professional Reporting**: Detailed test execution reports with screenshots
 
 ## Author
-**Vidhya Sai**  
-Automation Test Engineer  
-GitHub: [@vidhyasai92](https://github.com/vidhyasai92)
 
-*This project was created for learning purposes and to demonstrate automation testing skills.*
+Built as part of automation testing portfolio demonstrating advanced Selenium WebDriver concepts and real-world application testing scenarios.

@@ -37,4 +37,16 @@ public class JSUtils {
     public static void refreshPage() {
         getJSExecutor().executeScript("history.go(0)");
     }
+    
+    public static void enterText(WebElement element, String text) {
+        getJSExecutor().executeScript("arguments[0].value = arguments[1];", element, text);
+    }
+    
+    public static String getCurrentUrl() {
+        return getJSExecutor().executeScript("return window.location.href;").toString();
+    }
+    
+    public static void generateAlert(String message) {
+        getJSExecutor().executeScript("alert(arguments[0]);", message);
+    }
 }

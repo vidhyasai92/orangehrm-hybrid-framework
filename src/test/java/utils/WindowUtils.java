@@ -36,4 +36,15 @@ public class WindowUtils {
     public static int getWindowCount() {
         return DriverFactory.getDriver().getWindowHandles().size();
     }
+    
+    public static void switchToNewWindow(String originalWindow) {
+        WebDriver driver = DriverFactory.getDriver();
+        Set<String> allWindows = driver.getWindowHandles();
+        for (String window : allWindows) {
+            if (!window.equals(originalWindow)) {
+                driver.switchTo().window(window);
+                break;
+            }
+        }
+    }
 }
